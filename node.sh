@@ -39,4 +39,4 @@ sudo apt-mark hold kubelet kubeadm kubectl
 current_ip=`ip a s | grep enp0s8$ | awk '{ split( $2, cur_ip, "/" ); print cur_ip[1] }'`
 current_cidr=`echo "${current_ip}" | awk '{ split( $0, cidr, "."); print cidr[1]"."cidr[2]".0.0/16"}'`
 swapoff -a
-
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
