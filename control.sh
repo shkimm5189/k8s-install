@@ -40,7 +40,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 swapoff -a
 
 # Setting k8s 
-kubeadm init --control-plane-endpoint "${current_ip}" --pod-network-cidr "${current_cidr}" --apiserver-advertise-address "${current_ip}"
+sudo kubeadm init --control-plane-endpoint "${current_ip}" --pod-network-cidr "${current_cidr}" --apiserver-advertise-address "${current_ip}"
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -51,4 +51,4 @@ hash_val=`openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pub
    openssl dgst -sha256 -hex | sed 's/^.* //'`
 # Setting add-on network calico
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-sudo kubeadm join --token "${toeken_val}" "${current_ip}":6443 --discovery-token-ca-cert-hash sha256:"${hash_val}"
+sudo kubeadm join --token "${token_val}" "${current_ip}":6443 --discovery-token-ca-cert-hash sha256:"${hash_val}"
