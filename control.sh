@@ -9,17 +9,17 @@ current_ip=`ip a s | grep enp0s8$ | awk '{ split( $2, cur_ip, "/" ); print cur_i
 current_cidr=`echo "${current_ip}" | awk '{ split( $0, cidr, "."); print cidr[1]"."cidr[2]".0.0/16"}'`
 # docker install
 sudo apt-get remove docker docker-engine docker.io containerd runc
-sudo apt update
-sudo apt install -y \
+sudo apt-get update
+sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release 
+    lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # kubeadm install
 sudo apt-get update
@@ -39,7 +39,7 @@ fi
 sudo apt-mark hold kubelet kubeadm kubectl
 swapoff -a
 
-# Setting k8s 
+# Setting k8s
 sudo kubeadm init --control-plane-endpoint "${current_ip}" --pod-network-cidr "${current_cidr}" --apiserver-advertise-address "${current_ip}"
 
 mkdir -p $HOME/.kube
