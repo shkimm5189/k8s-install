@@ -26,10 +26,11 @@ install version = 1.18.19
 ```
 원하는 설치 버전은 스크립트 파일안의 변수를 변경하길 바람.
 ```
-- [k8s-control]() <br>
-``sh ~/k8s-install/control.sh``
-- [k8s-workNode]()<br>
-``sh ~/k8s-install/node.sh``
+
+- control plane에서 실행 시켜야함.
+  ``sh ~/k8s-install/control.sh``
+- worker node에서 실행 시켜야함
+  ``sh ~/k8s-install/node.sh``
 
 ```bash
 # 컨트롤의 토큰, ip, hash 값을 넣어서 join을 시켜주어야한다.  
